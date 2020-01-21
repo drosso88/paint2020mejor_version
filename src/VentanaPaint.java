@@ -113,7 +113,9 @@ public class VentanaPaint extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
-        // TODO add your handling code here:
+        bufferGraphics.setColor(Color.BLACK);
+        bufferGraphics.fillOval(evt.getX(), evt.getY(), 5, 5);
+        repaint(0, 0, 1, 1);
     }//GEN-LAST:event_jPanel1MouseDragged
 
     /**
