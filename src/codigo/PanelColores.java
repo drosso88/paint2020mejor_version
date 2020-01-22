@@ -81,6 +81,7 @@ public class PanelColores extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel1.setOpaque(true);
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -89,6 +90,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 0));
+        jLabel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel2.setOpaque(true);
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -97,6 +99,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel3.setBackground(new java.awt.Color(153, 0, 51));
+        jLabel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel3.setOpaque(true);
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -105,6 +108,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel4.setOpaque(true);
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -113,6 +117,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel5.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel5.setOpaque(true);
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -121,6 +126,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel6.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel6.setOpaque(true);
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -129,6 +135,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel7.setBackground(new java.awt.Color(153, 153, 0));
+        jLabel7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel7.setOpaque(true);
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -137,6 +144,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel8.setBackground(new java.awt.Color(255, 0, 0));
+        jLabel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel8.setOpaque(true);
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -145,6 +153,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel9.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel9.setOpaque(true);
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -153,6 +162,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel10.setBackground(new java.awt.Color(51, 255, 255));
+        jLabel10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel10.setOpaque(true);
         jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -161,6 +171,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel11.setBackground(new java.awt.Color(255, 153, 51));
+        jLabel11.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel11.setOpaque(true);
         jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -169,6 +180,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel12.setBackground(new java.awt.Color(204, 102, 255));
+        jLabel12.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel12.setOpaque(true);
         jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -177,6 +189,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel13.setBackground(new java.awt.Color(0, 0, 204));
+        jLabel13.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel13.setOpaque(true);
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -185,6 +198,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel14.setBackground(new java.awt.Color(0, 102, 0));
+        jLabel14.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel14.setOpaque(true);
         jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -193,6 +207,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel15.setBackground(new java.awt.Color(204, 255, 204));
+        jLabel15.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel15.setOpaque(true);
         jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -201,6 +216,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel16.setBackground(new java.awt.Color(153, 0, 153));
+        jLabel16.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel16.setOpaque(true);
         jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -209,6 +225,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel17.setBackground(new java.awt.Color(153, 102, 0));
+        jLabel17.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel17.setOpaque(true);
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -217,6 +234,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel18.setBackground(new java.awt.Color(102, 255, 102));
+        jLabel18.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel18.setOpaque(true);
         jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -225,6 +243,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel19.setBackground(new java.awt.Color(0, 255, 51));
+        jLabel19.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel19.setOpaque(true);
         jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -233,6 +252,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel20.setBackground(new java.awt.Color(255, 204, 204));
+        jLabel20.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel20.setOpaque(true);
         jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -241,6 +261,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel21.setBackground(new java.awt.Color(153, 51, 0));
+        jLabel21.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel21.setOpaque(true);
         jLabel21.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -249,6 +270,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel22.setBackground(new java.awt.Color(102, 0, 51));
+        jLabel22.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel22.setOpaque(true);
         jLabel22.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -257,6 +279,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel23.setBackground(new java.awt.Color(51, 153, 255));
+        jLabel23.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel23.setOpaque(true);
         jLabel23.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -265,6 +288,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel24.setBackground(new java.awt.Color(102, 0, 102));
+        jLabel24.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel24.setOpaque(true);
         jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -273,6 +297,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel25.setBackground(new java.awt.Color(255, 102, 255));
+        jLabel25.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel25.setOpaque(true);
         jLabel25.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -281,6 +306,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel26.setBackground(new java.awt.Color(204, 204, 255));
+        jLabel26.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel26.setOpaque(true);
         jLabel26.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -289,6 +315,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel27.setBackground(new java.awt.Color(255, 102, 102));
+        jLabel27.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel27.setOpaque(true);
         jLabel27.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -297,6 +324,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel28.setBackground(new java.awt.Color(0, 102, 102));
+        jLabel28.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel28.setOpaque(true);
         jLabel28.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -305,6 +333,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel29.setBackground(new java.awt.Color(0, 102, 51));
+        jLabel29.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel29.setOpaque(true);
         jLabel29.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -313,6 +342,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel30.setBackground(new java.awt.Color(153, 0, 102));
+        jLabel30.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel30.setOpaque(true);
         jLabel30.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -321,6 +351,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel31.setBackground(new java.awt.Color(255, 153, 51));
+        jLabel31.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel31.setOpaque(true);
         jLabel31.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -329,6 +360,7 @@ public class PanelColores extends javax.swing.JPanel {
         });
 
         jLabel32.setBackground(new java.awt.Color(51, 0, 153));
+        jLabel32.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel32.setOpaque(true);
         jLabel32.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -336,6 +368,7 @@ public class PanelColores extends javax.swing.JPanel {
             }
         });
 
+        jLabel34.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel34.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

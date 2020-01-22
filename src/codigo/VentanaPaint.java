@@ -23,6 +23,8 @@ public class VentanaPaint extends javax.swing.JFrame {
     BufferedImage buffer = null;
 
     Graphics2D bufferGraphics, jpanelGraphics = null;
+    
+    int herramientaSeleccionada=0;
 
     public VentanaPaint() {
         initComponents();
@@ -123,10 +125,15 @@ public class VentanaPaint extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
-        bufferGraphics.setColor(colores1.colorSeleccionado);
-       
+        switch (herramientaSeleccionada){
+            case 0:
+                 bufferGraphics.setColor(colores1.colorSeleccionado);
         bufferGraphics.fillOval(evt.getX(), evt.getY(), 5, 5);
         repaint(0, 0, 1, 1);
+        
+        }
+        
+      
     }//GEN-LAST:event_jPanel1MouseDragged
 
     /**
