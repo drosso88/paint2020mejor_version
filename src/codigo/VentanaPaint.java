@@ -1,6 +1,6 @@
 package codigo;
 
-
+import codigo.formas.Circulo;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -17,14 +17,19 @@ import java.awt.image.BufferedImage;
  */
 public class VentanaPaint extends javax.swing.JFrame {
 
-    /** un buffer acelera, guarda una memoria intermedia que acelera la lectura del
-    * disco a la memoria. Servirá para que podamos dibujar  en el jpanel, 
-    *  que lo hace la tarjeta de memoria*/
+    /**
+     * un buffer acelera, guarda una memoria intermedia que acelera la lectura
+     * del disco a la memoria. Servirá para que podamos dibujar en el jpanel,
+     * que lo hace la tarjeta de memoria
+     */
     BufferedImage buffer = null;
+ 
 
     Graphics2D bufferGraphics, jpanelGraphics = null;
-    
-    int herramientaSeleccionada=0;
+
+    int herramientaSeleccionada = 0;
+
+    Circulo miCirculo = null;
 
     public VentanaPaint() {
         initComponents();
@@ -43,30 +48,30 @@ public class VentanaPaint extends javax.swing.JFrame {
         // inicializo el buffer para que se pinte de blanco entero 
         bufferGraphics.setColor(Color.WHITE);
         //mismo ancho y alto que nuestro jpanel
-      
-        
+
         bufferGraphics.fillRect(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
-        
+
         //enlazamos el jPanel1 con el JPanelGraphics, de esa forma lo q 
         //dibujemos dentro del JpanelGraphics irá al Jpanel1
         jpanelGraphics = (Graphics2D) jPanel1.getGraphics();
-        
 
     }
 
-    /**Enlazamos el jPanel con la zona que dibujamos sobreescribiendo un metodo:
-     * @Override 
-    */
+    /**
+     * Enlazamos el jPanel con la zona que dibujamos sobreescribiendo un metodo:
+     *
+     * @Override
+     */
     @Override
-    public void paint (Graphics g){
+    public void paint(Graphics g) {
         //llamamos al jframe para el metodo paint que ya existia ignorando el codigo preexistente
         super.paint(g);
-        
+
         // pinto el buffer sobre el jPanel, 
         jpanelGraphics.drawImage(buffer, 0, 0, null);
-        
-        
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,12 +83,18 @@ public class VentanaPaint extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         colores1 = new codigo.PanelColores();
+        herramientas1 = new codigo.Herramientas();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
             }
         });
 
@@ -98,12 +109,20 @@ public class VentanaPaint extends javax.swing.JFrame {
             .addGap(0, 342, Short.MAX_VALUE)
         );
 
+        herramientas1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                herramientas1MousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
+                .addGap(21, 21, 21)
+                .addComponent(herramientas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -114,9 +133,15 @@ public class VentanaPaint extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(68, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(herramientas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(colores1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -125,16 +150,35 @@ public class VentanaPaint extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
-        switch (herramientaSeleccionada){
+        switch (herramientaSeleccionada) {
             case 0:
-                 bufferGraphics.setColor(colores1.colorSeleccionado);
-        bufferGraphics.fillOval(evt.getX(), evt.getY(), 5, 5);
-        repaint(0, 0, 1, 1);
-        
+                bufferGraphics.setColor(colores1.colorSeleccionado);
+                bufferGraphics.fillOval(evt.getX(), evt.getY(), 5, 5);
+                break;   
+
+            case 1:
+                miCirculo.dibujate(bufferGraphics, evt.getX());
+                break;
+
         }
-        
-      
+  repaint(0, 0, 1, 1);
+
     }//GEN-LAST:event_jPanel1MouseDragged
+
+    private void herramientas1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_herramientas1MousePressed
+        herramientaSeleccionada = 1; //cambio a pintar circulo
+    }//GEN-LAST:event_herramientas1MousePressed
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        switch (herramientaSeleccionada) {
+            case 0:
+                break;
+
+            case 1:
+                miCirculo = new Circulo(evt.getX(), evt.getY(), 1, colores1.colorSeleccionado, true);
+                break;
+        }
+    }//GEN-LAST:event_jPanel1MousePressed
 
     /**
      * @param args the command line arguments
@@ -173,6 +217,7 @@ public class VentanaPaint extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private codigo.PanelColores colores1;
+    private codigo.Herramientas herramientas1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
