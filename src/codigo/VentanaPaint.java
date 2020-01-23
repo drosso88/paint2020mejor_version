@@ -1,6 +1,7 @@
 package codigo;
 
 import codigo.formas.Circulo;
+import codigo.formas.Cuadrado;
 import codigo.formas.Estrella;
 import codigo.formas.Forma;
 import codigo.formas.Pentagono;
@@ -25,10 +26,9 @@ public class VentanaPaint extends javax.swing.JFrame {
      * del disco a la memoria. Servirá para que podamos dibujar en el jpanel,
      * que lo hace la tarjeta de memoria
      */
-    BufferedImage buffer = null;
- 
+    BufferedImage buffer, buffer2 = null;
 
-    Graphics2D bufferGraphics, jpanelGraphics = null;
+    Graphics2D bufferGraphics, bufferGraphics2, jpanelGraphics = null;
 
     Circulo miCirculo = null;
     Forma miForma = null;
@@ -44,15 +44,17 @@ public class VentanaPaint extends javax.swing.JFrame {
         //se crea una imagen de igual ancho y alto q el JPanel1
         //Buffer almacena
         buffer = (BufferedImage) jPanel1.createImage(jPanel1.getWidth(), jPanel1.getHeight());
+        buffer2 = (BufferedImage) jPanel1.createImage(jPanel1.getWidth(), jPanel1.getHeight());
         //casteo= convertir de un tipo a otro
         //creo una imagen modificable
         bufferGraphics = buffer.createGraphics();
+        bufferGraphics2 = buffer2.createGraphics();
         // inicializo el buffer para que se pinte de blanco entero 
         bufferGraphics.setColor(Color.WHITE);
         //mismo ancho y alto que nuestro jpanel
-
+        bufferGraphics2.setColor(Color.WHITE);
         bufferGraphics.fillRect(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
-
+        bufferGraphics2.fillRect(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
         //enlazamos el jPanel1 con el JPanelGraphics, de esa forma lo q 
         //dibujemos dentro del JpanelGraphics irá al Jpanel1
         jpanelGraphics = (Graphics2D) jPanel1.getGraphics();
@@ -97,6 +99,9 @@ public class VentanaPaint extends javax.swing.JFrame {
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jPanel1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jPanel1MouseReleased(evt);
             }
         });
 
@@ -146,18 +151,27 @@ public class VentanaPaint extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+        bufferGraphics.drawImage(buffer2,0,0,null);
         switch (herramientas1.formaElegida) {
             case 0:
                 bufferGraphics.setColor(colores1.colorSeleccionado);
-                bufferGraphics.fillOval(evt.getX(), evt.getY(), 5, 5);
-                break;   
+                bufferGraphics.fillOval(evt.getX(), evt.getY(), 4, 4);
+                break;
 
-               case 1 : miCirculo.dibujate(bufferGraphics, evt.getX());break;
-            case 5 : miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());break;
-            case 256 : miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());break;
+            case 1:
+                miCirculo.dibujate(bufferGraphics, evt.getX());
+                break;
+            case 4:miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
+                break;
+            case 5:
+                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
+                break;
+            case 256:
+                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
+                break;
 
         }
-  repaint(0, 0, 1, 1);
+        repaint(0, 0, 1, 1);
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
@@ -169,14 +183,23 @@ public class VentanaPaint extends javax.swing.JFrame {
                 miCirculo = new Circulo(evt.getX(), evt.getY(), 1, colores1.colorSeleccionado, true);
                 miCirculo.dibujate(bufferGraphics, evt.getX());
                 break;
-            case 5 : miForma = new Pentagono(evt.getX(), evt.getY(), 5, colores1.colorSeleccionado , true);
-                     miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
-                break;    
-            case 256 : miForma = new Estrella(evt.getX(), evt.getY(), 256, colores1.colorSeleccionado , true);
-                     miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
-                break; 
+            case 4 : miForma = new Cuadrado(evt.getX(), evt.getY(), 4, colores1.colorSeleccionado, true);
+                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
+                break;
+            case 5:
+                miForma = new Pentagono(evt.getX(), evt.getY(), 5, colores1.colorSeleccionado, true);
+                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
+                break;
+            case 256:
+                miForma = new Estrella(evt.getX(), evt.getY(), 256, colores1.colorSeleccionado, true);
+                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
+                break;
         }
     }//GEN-LAST:event_jPanel1MousePressed
+
+    private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
+       miForma.dibujate(bufferGraphics2, evt.getX(), evt.getX());
+    }//GEN-LAST:event_jPanel1MouseReleased
 
     /**
      * @param args the command line arguments
