@@ -5,6 +5,7 @@ import codigo.formas.Cuadrado;
 import codigo.formas.Estrella;
 import codigo.formas.Forma;
 import codigo.formas.Pentagono;
+import codigo.formas.Triangulo;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -161,6 +162,10 @@ public class VentanaPaint extends javax.swing.JFrame {
             case 1:
                 miCirculo.dibujate(bufferGraphics, evt.getX());
                 break;
+                
+            case 3:miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
+                break; 
+                
             case 4:miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
                 break;
             case 5:
@@ -180,18 +185,22 @@ public class VentanaPaint extends javax.swing.JFrame {
                 break;
 
             case 1:
-                miCirculo = new Circulo(evt.getX(), evt.getY(), 1, colores1.colorSeleccionado, true);
+                miCirculo = new Circulo(evt.getX(), evt.getY(), 1, colores1.colorSeleccionado, herramientas1.relleno);
                 miCirculo.dibujate(bufferGraphics, evt.getX());
                 break;
-            case 4 : miForma = new Cuadrado(evt.getX(), evt.getY(), 4, colores1.colorSeleccionado, true);
+            case 3: miForma = new Triangulo (evt.getX(), evt.getY(), 3, colores1.colorSeleccionado, herramientas1.relleno);
+                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
+                break; 
+                
+            case 4 : miForma = new Cuadrado(evt.getX(), evt.getY(), 4, colores1.colorSeleccionado, herramientas1.relleno);
                 miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
                 break;
             case 5:
-                miForma = new Pentagono(evt.getX(), evt.getY(), 5, colores1.colorSeleccionado, true);
+                miForma = new Pentagono(evt.getX(), evt.getY(), 5, colores1.colorSeleccionado, herramientas1.relleno);
                 miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
                 break;
             case 256:
-                miForma = new Estrella(evt.getX(), evt.getY(), 256, colores1.colorSeleccionado, true);
+                miForma = new Estrella(evt.getX(), evt.getY(), 256, colores1.colorSeleccionado, herramientas1.relleno);
                 miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
                 break;
         }
