@@ -32,7 +32,8 @@ public class VentanaPaint extends javax.swing.JFrame {
     Graphics2D bufferGraphics, bufferGraphics2, jpanelGraphics = null;
 
     Circulo miCirculo = null;
-    Forma miForma = null;
+    //para que la forma no de error
+    Forma miForma = new Forma(-1 , -1, 1,Color.white, false); 
 
     public VentanaPaint() {
         initComponents();
@@ -155,8 +156,8 @@ public class VentanaPaint extends javax.swing.JFrame {
         bufferGraphics.drawImage(buffer2,0,0,null);
         switch (herramientas1.formaElegida) {
             case 0:
-                bufferGraphics.setColor(colores1.colorSeleccionado);
-                bufferGraphics.fillOval(evt.getX(), evt.getY(), 4, 4);
+                bufferGraphics2.setColor(colores1.colorSeleccionado);
+                bufferGraphics2.fillOval(evt.getX(), evt.getY(), 4, 4);
                 break;
 
             case 1:
@@ -208,6 +209,10 @@ public class VentanaPaint extends javax.swing.JFrame {
 
     private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
        miForma.dibujate(bufferGraphics2, evt.getX(), evt.getX());
+       //si es el circulo lo dibuja sobre el buffer2
+       if(herramientas1.formaElegida == 1){
+        miCirculo.dibujate(bufferGraphics2, evt.getX());
+       }
     }//GEN-LAST:event_jPanel1MouseReleased
 
     /**
