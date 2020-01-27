@@ -37,7 +37,7 @@ public class Forma extends Polygon{
     }
     
      public void dibujate(Graphics2D g2, int _posX, int _posY) {
-      calculaVertices(y- _posY, x- _posY);
+      calculaVertices(y- _posY, x- _posX);
         g2.setColor(color);
         if (relleno){
         g2.fill(this);
