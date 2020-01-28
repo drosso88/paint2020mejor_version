@@ -346,7 +346,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       
+       jDialog1.setVisible(false);
         colores1.colorSeleccionado = jColorChooser1.getColor();
    
     }//GEN-LAST:event_jButton3ActionPerformed
