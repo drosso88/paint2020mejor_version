@@ -280,6 +280,9 @@ public class VentanaPaint extends javax.swing.JFrame {
             .addGap(0, 500, Short.MAX_VALUE)
         );
 
+        colores1.setToolTipText("para que elijas colores");
+
+        jButton1.setToolTipText("si todos los colores puestos no te valen, con esto sacas la paleta entera");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

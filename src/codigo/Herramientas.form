@@ -132,21 +132,33 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Dibuja c&#xed;rculos, no hay m&#xe1;s misterio"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="no hace la declaracion de la renta, hace cuadrados"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton4">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="no es una casita, es un pentagono"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton5">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="no es el boton del comunismo, dibuja estrellas"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
       </Events>
@@ -163,46 +175,73 @@
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton6">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="dibuja triangulitos"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton7">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="un pu&#xf1;etero lapiz de toda la vida&#xa;"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton8">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="pinta como en tus a&#xf1;os de delincuente graffitero"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton9">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="te hace la cena. Es broma!! son rectangulos"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton10">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="a brochazos cual pintor de brocha gorda"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton10ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton11">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="inserta la tonter&#xed;a que escribas"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton11ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton12">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="borra tu destrozo y tu vida"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton12ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton13">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="no desparasita al perro, sino que te captura el color"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton13ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton14">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="rellena la seccion que le digas"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton14ActionPerformed"/>
       </Events>

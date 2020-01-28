@@ -264,10 +264,16 @@
       </Layout>
     </Container>
     <Component class="codigo.PanelColores" name="colores1">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="para que elijas colores"/>
+      </Properties>
     </Component>
     <Component class="codigo.Herramientas" name="herramientas1">
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="si todos los colores puestos no te valen, con esto sacas la paleta entera"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
