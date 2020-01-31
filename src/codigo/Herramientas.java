@@ -100,7 +100,7 @@ public class Herramientas extends javax.swing.JPanel {
 
         ImageIcon miImagen7
                 = new ImageIcon(
-                        new ImageIcon(getClass().getResource("/codigo/iconosPaint/rectangulo.png"))
+                        new ImageIcon(getClass().getResource("/codigo/iconosPaint/linea.png"))
                                 .getImage()
                                 .getScaledInstance(25,
                                         20,
@@ -432,7 +432,8 @@ public class Herramientas extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-      
+       //linea recta
+        formaElegida = 2;
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
