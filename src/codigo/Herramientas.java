@@ -248,7 +248,7 @@ public class Herramientas extends javax.swing.JPanel {
             }
         });
 
-        jButton9.setToolTipText("te hace la cena. Es broma!! son rectangulos");
+        jButton9.setToolTipText("hace lineas rectas ");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);

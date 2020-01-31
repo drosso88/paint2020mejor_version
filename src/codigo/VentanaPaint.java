@@ -4,6 +4,7 @@ import codigo.formas.Circulo;
 import codigo.formas.Cuadrado;
 import codigo.formas.Estrella;
 import codigo.formas.Forma;
+import codigo.formas.Linea;
 import codigo.formas.Pentagono;
 import codigo.formas.Triangulo;
 import java.awt.Color;
@@ -372,18 +373,29 @@ public class VentanaPaint extends javax.swing.JFrame {
 
             case 1:
                 miCirculo.dibujate(bufferGraphics, evt.getX());
+                
+                
+            case 2 :
+                //linea recta
+                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
+                break;
+                
              
             case 3:
+                //triangulo
                 miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
                 break;
 
             case 4:
+                //cuadrado
                 miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
                 break;
             case 5:
+                //pentagono
                 miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
                 break;
             case 256:
+                //estrella
                 miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
                 break;
 
@@ -405,7 +417,11 @@ public class VentanaPaint extends javax.swing.JFrame {
                 break;
            
             case 2:
+                //linea recta
+                miForma = new Linea (evt.getX(), evt.getY(), 2, colores1.colorSeleccionado, herramientas1.relleno);
+                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
                 break;
+                
             case 3:
                 miForma = new Triangulo(evt.getX(), evt.getY(), 3, colores1.colorSeleccionado, herramientas1.relleno);
                 miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
