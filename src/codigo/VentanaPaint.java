@@ -26,7 +26,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 /**
  *
- * @author Rocio Soriano
+ * @author Rocio Soriano/ Alejandro Serrano/ Igor Repyakh
  */
 public class VentanaPaint extends javax.swing.JFrame {
 
@@ -358,6 +358,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         bufferGraphics.drawImage(buffer2, 0, 0, null);
         switch (herramientas1.formaElegida) {
+            //herramienta de Trazo recto
             case 0:
                 x2 = evt.getX();
                 y2 = evt.getY();
@@ -371,12 +372,7 @@ public class VentanaPaint extends javax.swing.JFrame {
 
             case 1:
                 miCirculo.dibujate(bufferGraphics, evt.getX());
-                break;
-            //esta es la brocha
-            case 2:
-                bufferGraphics2.setColor(colores1.colorSeleccionado);
-                bufferGraphics2.drawLine(evt.getX(), evt.getY(), 20, 20);
-                break;
+             
             case 3:
                 miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
                 break;
@@ -398,6 +394,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         switch (herramientas1.formaElegida) {
             case 0:
+                //trazo recto
                 x1 = evt.getX();
                 y1 = evt.getY();
                 break;
@@ -406,7 +403,7 @@ public class VentanaPaint extends javax.swing.JFrame {
                 miCirculo = new Circulo(evt.getX(), evt.getY(), 1, colores1.colorSeleccionado, herramientas1.relleno);
                 miCirculo.dibujate(bufferGraphics, evt.getX());
                 break;
-            //este es el Spray
+           
             case 2:
                 break;
             case 3:
@@ -438,6 +435,8 @@ public class VentanaPaint extends javax.swing.JFrame {
         
           
         }
+        
+        //herramienta pipeta que captura el color del pixel
   else if(herramientas1.formaElegida == 13) {
             Color c = new Color(buffer.getRGB(evt.getX(), evt.getY()));
             colores1.colorSeleccionado = c;
@@ -464,8 +463,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
-        //boton guardar
-
+   
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
