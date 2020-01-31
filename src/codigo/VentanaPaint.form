@@ -252,6 +252,9 @@
       </Layout>
     </Container>
     <Component class="codigo.PanelColores" name="colores1">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="codigo.Herramientas" name="herramientas1">
     </Component>

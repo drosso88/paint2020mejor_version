@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
@@ -435,6 +434,15 @@ public class VentanaPaint extends javax.swing.JFrame {
         //si es el circulo lo dibuja sobre el buffer2
         if (herramientas1.formaElegida == 1) {
             miCirculo.dibujate(bufferGraphics2, evt.getX());
+           
+        
+          
+        }
+  else if(herramientas1.formaElegida == 13) {
+            Color c = new Color(buffer.getRGB(evt.getX(), evt.getY()));
+            colores1.colorSeleccionado = c;
+            colores1.jLabel34.setBackground(c);
+            
         }
     }//GEN-LAST:event_jPanel1MouseReleased
 
@@ -559,7 +567,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private codigo.PanelColores colores1;
+    public codigo.PanelColores colores1;
     private codigo.Herramientas herramientas1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
