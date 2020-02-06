@@ -6,7 +6,10 @@ import codigo.formas.Estrella;
 import codigo.formas.Forma;
 import codigo.formas.Linea;
 import codigo.formas.Pentagono;
+import codigo.formas.Texto;
+import codigo.formas.Trazo;
 import codigo.formas.Triangulo;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -36,20 +39,36 @@ public class VentanaPaint extends javax.swing.JFrame {
      * del disco a la memoria. Servirá para que podamos dibujar en el jpanel,
      * que lo hace la tarjeta de memoria
      */
-    BufferedImage buffer, buffer2 = null;
+    BufferedImage buffer0, buffer1, buffer2, buffer3, buffer4, buffer5 = null;
+    BufferedImage[] buffers = {buffer0, buffer1, buffer2, buffer3, buffer4, buffer5};
 
-    Graphics2D bufferGraphics //este es el lienzo
-            , bufferGraphics2, jpanelGraphics = null;
+    Graphics2D bufferGraphics0 //este es el lienzo
+            , bufferGraphics1, bufferGraphics2, bufferGraphics3, bufferGraphics4, bufferGraphics5, jpanelGraphics = null;
+    Graphics2D[] buffersG = {bufferGraphics0, bufferGraphics1, bufferGraphics2, bufferGraphics3, bufferGraphics4, bufferGraphics5};
 
+    int bufferActual = 0;
+    int bufferProvisional = 5;
+    
+    int numDeshacer=0;
     Circulo miCirculo = null;
     //para que la forma no de error
     Forma miForma = new Forma(-1, -1, 1, Color.white, false);
-    final static int SPRAY = 2;
-    Random aleatorio = new Random();
+    // final static int SPRAY = 2;
+    
     private int x1;
     private int x2;
     private int y1;
     private int y2;
+    private boolean bPainting = false;
+    private Graphics g;
+    Texto texto = new Texto("quick", -1, -1, Color.black);
+    BasicStroke trazo1 = new BasicStroke(15);
+    BasicStroke trazo2 = new BasicStroke(15,
+            BasicStroke.CAP_BUTT,
+            BasicStroke.JOIN_MITER,
+            10.0f,
+            new float[]{10.0f},
+            0.0f);
 
     public VentanaPaint() {
         initComponents();
@@ -60,31 +79,9 @@ public class VentanaPaint extends javax.swing.JFrame {
                         new ImageIcon(getClass().getResource("/codigo/iconosPaint/paleta.png"))
                                 .getImage()
                                 .getScaledInstance(jButton1.getWidth(), jButton1.getHeight(),
-                                         Image.SCALE_DEFAULT));
+                                        Image.SCALE_DEFAULT));
 
         jButton1.setIcon(miImagen);
-
-    }
-
-    private void pintarSpray(MouseEvent e) {
-        Random puntitos = new Random();
-        int posX, posY;
-
-        posX = e.getX();
-        posY = e.getY();
-        int graf1, graf2;
-
-        for (int i = 0; i < 35; i++) {
-
-            graf1 = puntitos.nextInt(20);
-            graf2 = puntitos.nextInt(20);
-
-            posX = e.getX() + graf1;
-            posY = e.getY() + graf2;
-            bufferGraphics.fillOval(posX, posX, 2, 2);
-
-        }
-        repaint(0, 0, 1, 1);
 
     }
 
@@ -93,18 +90,25 @@ public class VentanaPaint extends javax.swing.JFrame {
 
         //se crea una imagen de igual ancho y alto q el JPanel1
         //Buffer almacena
-        buffer = (BufferedImage) jPanel1.createImage(jPanel1.getWidth(), jPanel1.getHeight());
-        buffer2 = (BufferedImage) jPanel1.createImage(jPanel1.getWidth(), jPanel1.getHeight());
-        //casteo= convertir de un tipo a otro
+        for (int i = 0; i < 6; i++) {
+            buffers[i] = (BufferedImage) jPanel1.createImage(jPanel1.getWidth(), jPanel1.getHeight());
+        }
+
         //creo una imagen modificable
-        bufferGraphics = buffer.createGraphics();
-        bufferGraphics2 = buffer2.createGraphics();
+        for (int j = 0; j < 6; j++) {
+            buffersG[j] = buffers[j].createGraphics();
+        }
+
+        for (int k = 0; k < 6; k++) {
+            buffersG[k].setColor(Color.WHITE);
+        }
         // inicializo el buffer para que se pinte de blanco entero 
-        bufferGraphics.setColor(Color.WHITE);
+
         //mismo ancho y alto que nuestro jpanel
-        bufferGraphics2.setColor(Color.WHITE);
-        bufferGraphics.fillRect(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
-        bufferGraphics2.fillRect(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
+        for (int l = 0; l < 6; l++) {
+            buffersG[l].fillRect(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
+        }
+
         //enlazamos el jPanel1 con el JPanelGraphics, de esa forma lo q 
         //dibujemos dentro del JpanelGraphics irá al Jpanel1
         jpanelGraphics = (Graphics2D) jPanel1.getGraphics();
@@ -122,8 +126,7 @@ public class VentanaPaint extends javax.swing.JFrame {
         super.paint(g);
 
         // pinto el buffer sobre el jPanel, 
-        jpanelGraphics.drawImage(buffer, 0, 0, null);
-
+        jpanelGraphics.drawImage(buffers[bufferActual], 0, 0, null);
     }
 
     /**
@@ -148,8 +151,12 @@ public class VentanaPaint extends javax.swing.JFrame {
         herramientas1 = new codigo.Herramientas();
         jButton1 = new javax.swing.JButton();
         jFileChooser2 = new javax.swing.JFileChooser();
+        jSlider1 = new javax.swing.JSlider();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -265,12 +272,18 @@ public class VentanaPaint extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 765, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 565, Short.MAX_VALUE)
         );
+
+        herramientas1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                herramientas1MouseClicked(evt);
+            }
+        });
 
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,7 +297,36 @@ public class VentanaPaint extends javax.swing.JFrame {
             }
         });
 
+        jSlider1.setMaximum(50);
+        jSlider1.setValue(0);
+        jSlider1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jSlider1MouseDragged(evt);
+            }
+        });
+
+        jLabel1.setText("Buffer 0");
+
         jMenu1.setText("Archivo");
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setText("Undo");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem4.setText("Redo");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
         jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Guardar");
@@ -330,134 +372,217 @@ public class VentanaPaint extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(herramientas1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(herramientas1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(colores1, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 17, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
+                            .addComponent(colores1, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE))
+                        .addGap(0, 28, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(herramientas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(herramientas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(colores1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
-        bufferGraphics.drawImage(buffer2, 0, 0, null);
-        switch (herramientas1.formaElegida) {
-            //herramienta de Trazo recto
-            case 0:
-                x2 = evt.getX();
-                y2 = evt.getY();
-                if (x1 != x2 || y1 != y2) {
-                    bufferGraphics2.setColor(colores1.colorSeleccionado);
-                    bufferGraphics2.drawLine(x1, y1, x2, y2);
-                    x1 = x2;
-                    y1 = y2;
-                }
-                break;
+        buffersG[bufferActual].drawImage(buffers[bufferProvisional], 0, 0, null);
 
-            case 1:
-                miCirculo.dibujate(bufferGraphics, evt.getX());
-                
-                
-            case 2 :
-                //linea recta
-                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
-                break;
-                
-             
-            case 3:
-                //triangulo
-                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
-                break;
-
-            case 4:
-                //cuadrado
-                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
-                break;
-            case 5:
-                //pentagono
-                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
-                break;
-            case 256:
-                //estrella
-                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
-                break;
-
+        if (herramientas1.formaElegida == 1) {
+            miCirculo.dibujate(buffersG[bufferActual], evt.getX(), new Trazo(jSlider1.getValue()));
+            buffersG[bufferActual].drawImage(buffers[bufferProvisional], 0, 0, null);
         }
-        repaint(0, 0, 1, 1);
+        if (herramientas1.formaElegida != 11) {
+
+            switch (herramientas1.formaElegida) {
+                //herramienta de Trazo recto
+                case -1:
+
+                    x2 = evt.getX();
+                    y2 = evt.getY();
+                    if (x1 != x2 || y1 != y2) {
+                        buffersG[bufferProvisional].setColor(Color.WHITE);
+                        buffersG[bufferProvisional].setStroke(new Trazo(30));
+                        buffersG[bufferProvisional].drawLine(x1, y1, x2, y2);
+                        x1 = x2;
+                        y1 = y2;
+                    }
+                    break;
+                case 0:
+
+                    x2 = evt.getX();
+                    y2 = evt.getY();
+                    if (x1 != x2 || y1 != y2) {
+                        buffersG[bufferProvisional].setColor(colores1.colorSeleccionado);
+                        buffersG[bufferProvisional].setStroke(new Trazo(jSlider1.getValue()));
+                        buffersG[bufferProvisional].drawLine(x1, y1, x2, y2);
+                        x1 = x2;
+                        y1 = y2;
+                    }
+                    break;
+
+                case 8:
+                    int nMouseX = evt.getX();
+                    int nMouseY = evt.getY();
+                    if (bPainting) {
+                        for (int nPaint = 0; nPaint < 25; nPaint++) {
+                            //generate a random distance from 0 to 19
+                            int nRand = (int) (Math.random() * 20);
+                            //generate a random angle from 0 to 2 pi
+                            double dTheta = Math.random() * 628 / 100.0;
+                            //find x and y of random dot
+                            int nX = (int) (nMouseX + nRand * Math.cos(dTheta));
+                            int nY = (int) (nMouseY + nRand * Math.sin(dTheta));
+
+                            buffersG[bufferProvisional].setColor(colores1.colorSeleccionado);
+                            buffersG[bufferProvisional].drawOval(nX, nY, 1, 1);
+
+                        }
+
+                    }
+                    break;
+                case 1:
+                    miCirculo.dibujate(buffersG[bufferActual], evt.getX(), new Trazo(jSlider1.getValue()));
+                    break;
+
+                default:
+                    if (herramientas1.discontinuo == true) {
+                        miForma.dibujate(buffersG[bufferActual], evt.getY(), evt.getX(), new Trazo(jSlider1.getValue(), true));
+                    } else {
+                        miForma.dibujate(buffersG[bufferActual], evt.getY(), evt.getX(), new Trazo(jSlider1.getValue()));
+                    }
+                    break;
+            }
+            repaint(0, 0, 1, 1);
+        }
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        switch (herramientas1.formaElegida) {
-            case 0:
-                //trazo recto
-                x1 = evt.getX();
-                y1 = evt.getY();
-                break;
+        bufferActual++;
+        if(bufferActual ==5){
+            bufferActual=0;
+        }
+        String sBufferActual=String.valueOf(bufferActual);
+        jLabel1.setText("Buffer " + sBufferActual);
+        if (herramientas1.formaElegida != 11) {
 
-            case 1:
-                miCirculo = new Circulo(evt.getX(), evt.getY(), 1, colores1.colorSeleccionado, herramientas1.relleno);
-                miCirculo.dibujate(bufferGraphics, evt.getX());
-                break;
-           
-            case 2:
-                //linea recta
-                miForma = new Linea (evt.getX(), evt.getY(), 2, colores1.colorSeleccionado, herramientas1.relleno);
-                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
-                break;
-                
-            case 3:
-                miForma = new Triangulo(evt.getX(), evt.getY(), 3, colores1.colorSeleccionado, herramientas1.relleno);
-                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
-                break;
+            System.out.println("quick");
 
-            case 4:
-                miForma = new Cuadrado(evt.getX(), evt.getY(), 4, colores1.colorSeleccionado, herramientas1.relleno);
-                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
-                break;
-            case 5:
-                miForma = new Pentagono(evt.getX(), evt.getY(), 5, colores1.colorSeleccionado, herramientas1.relleno);
-                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
-                break;
-            case 256:
-                miForma = new Estrella(evt.getX(), evt.getY(), 256, colores1.colorSeleccionado, herramientas1.relleno);
-                miForma.dibujate(bufferGraphics, evt.getX(), evt.getY());
-                break;
+            switch (herramientas1.formaElegida) {
+
+                //goma de borrar
+                case -1:
+                    x1 = evt.getX();
+                    y1 = evt.getY();
+                case 0:
+                    //trazo recto
+                    x1 = evt.getX();
+                    y1 = evt.getY();
+                    break;
+
+                case 1:
+                    miCirculo = new Circulo(evt.getX(), evt.getY(), 1, colores1.colorSeleccionado, herramientas1.relleno);
+
+                    break;
+
+                case 2:
+                    //linea recta
+                    miForma = new Linea(evt.getX(), evt.getY(), 2, colores1.colorSeleccionado, herramientas1.relleno);
+
+                    break;
+
+                case 3:
+                    miForma = new Triangulo(evt.getX(), evt.getY(), 3, colores1.colorSeleccionado, herramientas1.relleno);
+
+                    break;
+
+                case 4:
+                    miForma = new Cuadrado(evt.getX(), evt.getY(), 4, colores1.colorSeleccionado, herramientas1.relleno);
+
+                    break;
+                case 5:
+                    miForma = new Pentagono(evt.getX(), evt.getY(), 5, colores1.colorSeleccionado, herramientas1.relleno);
+
+                    break;
+                case 8:
+                    bPainting = true;
+                    break;
+
+                case 256:
+                    miForma = new Estrella(evt.getX(), evt.getY(), 256, colores1.colorSeleccionado, herramientas1.relleno);
+                    break;
+            }
         }
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void jPanel1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseReleased
-        miForma.dibujate(bufferGraphics2, evt.getX(), evt.getY());
-        //si es el circulo lo dibuja sobre el buffer2
-        if (herramientas1.formaElegida == 1) {
-            miCirculo.dibujate(bufferGraphics2, evt.getX());
-           
-        
-          
-        }
-        
-        //herramienta pipeta que captura el color del pixel
-  else if(herramientas1.formaElegida == 13) {
-            Color c = new Color(buffer.getRGB(evt.getX(), evt.getY()));
-            colores1.colorSeleccionado = c;
-            colores1.jLabel34.setBackground(c);
-            
+        if (herramientas1.formaElegida == 11) {
+            texto = new Texto(herramientas1.textoDibujado, evt.getX(), evt.getY(), Color.BLACK);
+            buffersG[bufferProvisional].drawString(herramientas1.textoDibujado, evt.getX(), evt.getY());
+            buffersG[bufferProvisional].drawImage(buffers[bufferProvisional], 0, 0, null);
+            buffersG[bufferActual].drawImage(buffers[bufferProvisional], 0, 0, null);
+            repaint(0, 0, 1, 1);
+        } else {
+            //si es el circulo lo dibuja sobre el buffer2
+            switch (herramientas1.formaElegida) {
+
+                case 0:
+                    buffersG[bufferProvisional].drawImage(buffers[bufferProvisional], 0, 0, null);
+                    repaint(0, 0, 1, 1);
+                    break;
+                case 8:
+                    buffersG[bufferProvisional].drawImage(buffers[bufferProvisional], 0, 0, null);
+                    repaint(0, 0, 1, 1);
+                    break;
+
+                //herramienta pipeta que captura el color del pixel
+                case 13:
+                    Color c = new Color(buffers[bufferActual].getRGB(evt.getX(), evt.getY()));
+                    colores1.colorSeleccionado = c;
+                    colores1.jLabel34.setBackground(c);
+                    break;
+                case 1:
+                    buffersG[bufferProvisional].drawImage(buffers[bufferActual], 0, 0, null);
+
+                    repaint(0, 0, 1, 1);
+                    break;
+
+                default:
+                    if (herramientas1.discontinuo == true && herramientas1.formaElegida != 11) {
+                        miForma.dibujate(buffersG[bufferProvisional], evt.getY(), evt.getX(), new Trazo(jSlider1.getValue(), true));
+                    } else {
+                        miForma.dibujate(buffersG[bufferProvisional], evt.getY(), evt.getX(), new Trazo(jSlider1.getValue()));
+                    }
+                    buffersG[bufferActual].drawImage(buffers[bufferProvisional], 0, 0, null);
+                    buffersG[bufferProvisional].drawImage(buffers[bufferProvisional], 0, 0, null);
+                    buffersG[bufferActual].drawImage(buffers[bufferProvisional], 0, 0, null);
+                    buffersG[bufferProvisional].drawImage(buffers[bufferProvisional], 0, 0, null);
+                    repaint(0, 0, 1, 1);
+                    break;
+
+            }
         }
     }//GEN-LAST:event_jPanel1MouseReleased
 
@@ -479,7 +604,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
-   
+
     }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -493,14 +618,14 @@ public class VentanaPaint extends javax.swing.JFrame {
             if (extension.equalsIgnoreCase("jpg") || extension.equalsIgnoreCase("png")) {
 
                 try {
-                    bufferGraphics.drawImage(ImageIO.read(fichero), 0, 0, null);
-                    bufferGraphics2.drawImage(ImageIO.read(fichero), 0, 0, null);
+                    buffersG[bufferActual].drawImage(ImageIO.read(fichero), 0, 0, null);
+                    buffersG[bufferProvisional].drawImage(ImageIO.read(fichero), 0, 0, null);
                 } catch (IOException e) {
 
                 }
             }
         } else {
-          
+
             //mensaje de extensión no valido
         }
 
@@ -523,7 +648,7 @@ public class VentanaPaint extends javax.swing.JFrame {
 
             if (extension.equalsIgnoreCase("jpg") || extension.equalsIgnoreCase("png")) {
                 try {
-                    buffer = ImageIO.read(fichero);
+                    buffers[bufferActual] = ImageIO.read(fichero);
                     repaint(0, 0, 1, 1);
                 } catch (IOException ex) {
                 }
@@ -545,10 +670,40 @@ public class VentanaPaint extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFileChooser2ActionPerformed
 
+    private void jSlider1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSlider1MouseDragged
+        jSlider1.getValue();
+    }//GEN-LAST:event_jSlider1MouseDragged
+
+    private void herramientas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_herramientas1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_herramientas1MouseClicked
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       if (numDeshacer <= 4) {
+            int bufferPrevio = bufferActual--;
+            jpanelGraphics.drawImage(buffers[bufferPrevio], 0, 0, null);
+            String sBufferPrevio = String.valueOf(bufferPrevio);
+            jLabel1.setText("Buffer " + sBufferPrevio);
+            repaint(0, 0, 1, 1);
+            numDeshacer++;
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+         if(numDeshacer > 0){
+            int bufferSiguiente = bufferActual++;jpanelGraphics.drawImage(buffers[bufferSiguiente], 0, 0, null);
+            String sBufferSiguiente = String.valueOf(bufferSiguiente);
+            jLabel1.setText("Buffer " + sBufferSiguiente);
+            repaint(0, 0, 1, 1);
+            numDeshacer--;
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -593,6 +748,7 @@ public class VentanaPaint extends javax.swing.JFrame {
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JFileChooser jFileChooser2;
     private javax.swing.JFileChooser jFileChooser4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -600,6 +756,9 @@ public class VentanaPaint extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSlider jSlider1;
     // End of variables declaration//GEN-END:variables
 }
